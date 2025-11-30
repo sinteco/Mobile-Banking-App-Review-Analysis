@@ -1,2 +1,5 @@
 google-play-scraper
 pandas
+transformers
+tqdm
+torch
