@@ -3,3 +3,5 @@ pandas
 transformers
 tqdm
 torch
+vaderSentiment
+textblob

@@ -1,15 +1,19 @@
 import pandas as pd
 
-def group_themes(keywords_csv, output_csv):
-    df = pd.read_csv(keywords_csv)
-    # Simple rule-based grouping for demonstration
-    theme_map = {
-        'UI/UX': ['ui', 'interface', 'design', 'nice', 'look', 'user friendly'],
-        'Performance': ['fast', 'slow', 'loading', 'performance', 'crash', 'working', 'work'],
-        'Account Access': ['login', 'access', 'verification', 'account', 'register'],
-        'Transactions': ['transfer', 'send', 'receive', 'payment', 'transaction'],
-        'General Satisfaction': ['good', 'best', 'excellent', 'like', 'wow', 'super', 'application', 'app', 'bank', 'boa', 'cbe', 'dashen', 'mobile', 'service']
-    }
+THEME_MAP = {
+    'UI/UX': ['ui', 'interface', 'design', 'nice', 'look', 'user friendly'],
+    'Performance': ['fast', 'slow', 'loading', 'performance', 'crash', 'working', 'work'],
+    'Account Access': ['login', 'access', 'verification', 'account', 'register'],
+    'Transactions': ['transfer', 'send', 'receive', 'payment', 'transaction'],
+    'General Satisfaction': ['good', 'best', 'excellent', 'like', 'wow', 'super', 'application', 'app', 'bank', 'boa', 'cbe', 'dashen', 'mobile', 'service']
+}
+
+def group_themes(keywords_csv, output_csv, theme_map=THEME_MAP):
+    try:
+        df = pd.read_csv(keywords_csv)
+    except Exception as e:
+        print(f"Error reading {keywords_csv}: {e}")
+        return
     results = []
     for bank in df['bank'].unique():
         bank_keywords = df[df['bank'] == bank]['keyword'].tolist()
@@ -18,6 +22,8 @@ def group_themes(keywords_csv, output_csv):
             for theme, words in theme_map.items():
                 if any(w in kw for w in words):
                     themes.add(theme)
+        if not themes:
+            themes.add('Other')
         for theme in themes:
             results.append({'bank': bank, 'theme': theme})
     themes_df = pd.DataFrame(results)
