@@ -25,6 +25,27 @@
 - Themes are grouped using a rule-based mapping of keywords to 3–5 business-relevant categories per bank (see `theme_grouping.py`).
 - All scripts include error handling and modular functions for maintainability.
 
+### Database Schema (PostgreSQL)
+
+The project uses PostgreSQL (via Docker) to store cleaned and processed review data. The schema consists of two tables:
+
+**banks**
+- `bank_id` SERIAL PRIMARY KEY
+- `bank_name` VARCHAR(255) NOT NULL
+- `app_name` VARCHAR(255) NOT NULL
+
+**reviews**
+- `review_id` SERIAL PRIMARY KEY
+- `bank_id` INTEGER REFERENCES banks(bank_id)
+- `review_text` TEXT NOT NULL
+- `rating` INTEGER
+- `review_date` DATE
+- `sentiment_label` VARCHAR(32)
+- `sentiment_score` FLOAT
+- `source` VARCHAR(64)
+
+See `bank_reviews_schema.sql` and `docker-compose.yml` for setup. Use `create_schema_pg.py` to create tables and `insert_reviews_pg.py` to insert data from CSV.
+
 ### Files
 - `scrape_reviews.py`: Scrape reviews from Google Play.
 - `clean_reviews.py`: Preprocess and clean the review data.
