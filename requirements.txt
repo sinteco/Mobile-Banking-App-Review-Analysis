@@ -6,3 +6,6 @@ torch
 vaderSentiment
 textblob
 psycopg2-binary
+matplotlib
+seaborn
+wordcloud
