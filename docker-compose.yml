@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    container_name: pgpmdb_pnga_db_bank_reviews
+    environment:
+      POSTGRES_DB: bank_reviews
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+    ports:
+      - "5432:5432"

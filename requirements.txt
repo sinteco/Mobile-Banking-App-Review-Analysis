@@ -1,2 +1,11 @@
 google-play-scraper
 pandas
+transformers
+tqdm
+torch
+vaderSentiment
+textblob
+psycopg2-binary
+matplotlib
+seaborn
+wordcloud
