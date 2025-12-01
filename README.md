@@ -46,6 +46,15 @@ The project uses PostgreSQL (via Docker) to store cleaned and processed review d
 
 See `bank_reviews_schema.sql` and `docker-compose.yml` for setup. Use `create_schema_pg.py` to create tables and `insert_reviews_pg.py` to insert data from CSV.
 
+### Configuration & Verification
+- Environment variables for the PostgreSQL connection live in `.env` (see `.env.example`). Scripts use `python-dotenv` to load credentials securely.
+- Run `docker-compose up -d` to start the database with the `.env` configuration.
+- Execute `verify_data.sql` for validation queries (review counts, average ratings, sentiment distribution, duplicate checks, sample negatives).
+
+### Insights & Recommendations
+- Detailed per-bank drivers, pain points, recommendations, and ethical considerations live in `insights_recommendations.md`.
+- Visualization outputs reside in the `plots/` folder; regenerate via `python visualize_insights.py`.
+
 ### Files
 - `scrape_reviews.py`: Scrape reviews from Google Play.
 - `clean_reviews.py`: Preprocess and clean the review data.

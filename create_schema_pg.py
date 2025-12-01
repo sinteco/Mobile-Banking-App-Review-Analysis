@@ -1,11 +1,15 @@
 import psycopg2
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 DB_CONFIG = {
-    'host': 'localhost',
-    'port': 5432,
-    'dbname': 'bank_reviews',
-    'user': 'postgres',
-    'password': 'yourpassword',
+    'host': os.getenv('POSTGRES_HOST', 'localhost'),
+    'port': int(os.getenv('POSTGRES_PORT', 5432)),
+    'dbname': os.getenv('POSTGRES_DB', 'bank_reviews'),
+    'user': os.getenv('POSTGRES_USER', 'postgres'),
+    'password': os.getenv('POSTGRES_PASSWORD', 'yourpassword'),
 }
 
 SCHEMA_SQL = """
